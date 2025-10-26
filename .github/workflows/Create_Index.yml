@@ -21,11 +21,14 @@ jobs:
         with:
           folder: ${{github.workspace}}
           filename: Index.md
-
-      - name: Commit and Push Changes # <--- UPDATED STEP
-        uses: stefanzweifel/git-auto-commit-action@v6
-        with:
-          commit_message: "Auto-update: Generate folder/file index in README"
-          # By default, this action commits all changes, 
-          # but you can specify a glob pattern if needed:
-          # files: 'README.md'
+     
+      - name: Commit changes
+        continue-on-error: true
+        run: |
+          cd ${{github.workspace}}
+          git config --global user.email "Bot@Example.com"
+          git config --global user.name "DaanV2 Bot"
+          git add .
+          git commit -m "auto: Generated markdown indexes"
+          git push
+      
