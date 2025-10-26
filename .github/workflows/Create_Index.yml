@@ -19,20 +19,14 @@ jobs:
       - name: Generate Markdown Index
         uses: DaanV2/Markdown-Action-Create-Indexes@v3.0.0
         with:
-          # The file to generate the index in (your README)
-          filename: README.md
-          
-          # Sets the root directory for indexing
           folder: ${{github.workspace}}
-          
-          # Explicitly tell it to index common file types and folders
-          file-types: ".md, .txt, .pdf, .py, .js, .html, folder"
-          
-          # Ignore the GitHub workflow configuration folder
-          ignore: ".github, .git" 
-          
-          # Optional: Make the output hierarchical/nested (recommended)
-          list-style: 'nested'
+    filename: README.md
+    include: |
+      *.md
+      *.pdf
+      *.mobi
+      *.epub
+      *.zip
 
       - name: Commit and Push Changes # <--- UPDATED STEP
         uses: stefanzweifel/git-auto-commit-action@v6
