@@ -21,12 +21,6 @@ jobs:
         with:
           folder: ${{github.workspace}}
           filename: README.md
-          include: |
-            *.md
-            *.pdf
-            *.mobi
-            *.epub
-            *.zip
 
       - name: Commit and Push Changes # <--- UPDATED STEP
         uses: stefanzweifel/git-auto-commit-action@v6
