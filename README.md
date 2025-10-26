@@ -1,6 +1,6 @@
 # Test Implementations
 
-This repository contains various scripts and documentation.
+This repository contains selected test implementations of foundational AI ML.
 
 ## File Index
 This index was generated using the GitHub API.
