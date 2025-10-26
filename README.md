@@ -1,7 +1,7 @@
-# My Repository Index
+# My Project Documentation
 
-A quick navigation guide to the files in this project.
+This repository contains various scripts and documentation.
 
-``
-This is where the automatically generated index will appear. Do not edit content between the START and END comments.
-``
+## File Index
+***
+*Last updated by GitHub Action.*
