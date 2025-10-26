@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test Implementation File index
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Required to fetch all commits, which is needed to push a new commit
+          fetch-depth: 0
+
+      - name: Generate Markdown Index
+        uses: DaanV2/Markdown-Action-Create-Indexes@v3.0.0
+        with:
+          # The file to generate the index in (your README)
+          filename: README.md
+          
+          # Defines the path where the action starts looking for files/folders. 
+          # Use ${{github.workspace}} to scan the entire repo.
+          folder: ${{github.workspace}}
+
+      - name: Commit and Push Changes
+        uses: stefanprodan/git-checksum-action@v1 # A common action to commit changes
+        with:
+          # Use the GITHUB_TOKEN provided by GitHub for all actions
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "Auto-update: Generate folder/file index in README"
+          
+          # Only commit the README.md file
+          files: README.md
+          
+          # Prevent infinite loops by only running the commit if the file actually changed
+          skip_if_no_changes: true
